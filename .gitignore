@@ -8,3 +8,5 @@ build
 coverage
 #ignore the .env file
 .env.local
+#ignore the env folder in backend
+backend/env/
