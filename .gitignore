@@ -10,3 +10,5 @@ coverage
 .env.local
 #ignore the env folder in backend
 backend/env/
+#ignore the pycache folder in backend/backend
+__pycache__
