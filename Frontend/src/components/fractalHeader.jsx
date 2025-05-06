@@ -9,7 +9,7 @@ const fractalHeader = () => {
             <div className="absolute inset-3 bg-white dark:bg-gray-800 rounded-sm"></div>
             <div className="absolute inset-4 bg-teal-600 rounded-sm transform -rotate-90"></div>
           </div>
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-teal-600 to-emerald-500 bg-clip-text">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-teal-300 to-emerald-300 bg-clip-text text-transparent">
             FRACTAL
           </h1>
         </div>

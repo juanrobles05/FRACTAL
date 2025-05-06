@@ -1,5 +1,6 @@
 "use client"
 import FractalHeader from "./FractalHeader"
+import { Link } from "react-router-dom";
 
 const methodFormTemplate = ({
   functionValue,
@@ -18,6 +19,7 @@ const methodFormTemplate = ({
   submitText = "Calcular",
   methodName = "Numérico",
 }) => {
+
   return (
     <div className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
       <div className="bg-gradient-to-r from-teal-600 to-emerald-500 px-6 py-4">
@@ -26,15 +28,17 @@ const methodFormTemplate = ({
         <p className="text-teal-100 mt-1 text-sm text-center">Complete los siguientes parámetros</p>
       </div>
 
-      <div className="p-6">
+      <div className="p-3.5">
         <div className="mb-6 p-4 bg-teal-50 dark:bg-teal-900/20 rounded-lg border-l-4 border-teal-500">
           <p className="text-sm text-teal-800 dark:text-teal-200">
             Asegúrese de que la función sea continua en el intervalo dado. Para verificar, puede
-            <span className="text-teal-600 dark:text-teal-300 font-medium hover:underline cursor-pointer">
-              {" "}
-              graficar la función
-            </span>
-            .
+            <Link to="/graficador">
+              <span
+              className="text-teal-600 dark:text-teal-300 font-medium hover:underline cursor-pointer">
+                {" "} graficar la función
+              </span>
+              .
+            </Link>
           </p>
         </div>
 
@@ -51,7 +55,7 @@ const methodFormTemplate = ({
                 name="function"
                 value={functionValue}
                 onChange={onFunctionChange}
-                className="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all shadow-sm text-gray-900 dark:text-white pl-10"
+                className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all shadow-sm text-gray-900 dark:text-white pl-10"
                 placeholder="x³ - 2x - 5"
                 required
               />
@@ -73,7 +77,7 @@ const methodFormTemplate = ({
                 name="a"
                 value={aValue}
                 onChange={onAChange}
-                className="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all shadow-sm text-gray-900 dark:text-white"
+                className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all shadow-sm text-gray-900 dark:text-white"
                 step="0.1"
                 required
               />
@@ -89,7 +93,7 @@ const methodFormTemplate = ({
                 name="b"
                 value={bValue}
                 onChange={onBChange}
-                className="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all shadow-sm text-gray-900 dark:text-white"
+                className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all shadow-sm text-gray-900 dark:text-white"
                 step="0.1"
                 required
               />
@@ -108,7 +112,7 @@ const methodFormTemplate = ({
                 name="tol"
                 value={tolValue}
                 onChange={onTolChange}
-                className="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all shadow-sm text-gray-900 dark:text-white"
+                className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all shadow-sm text-gray-900 dark:text-white"
                 step="0.0001"
                 max="0.01"
                 required
@@ -125,7 +129,7 @@ const methodFormTemplate = ({
                 name="maxCount"
                 value={maxCountValue}
                 onChange={onMaxCountChange}
-                className="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all shadow-sm text-gray-900 dark:text-white"
+                className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all shadow-sm text-gray-900 dark:text-white"
                 required
               />
             </div>
@@ -162,7 +166,7 @@ const methodFormTemplate = ({
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 px-4 bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-700 hover:to-emerald-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all flex justify-center items-center disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full py-2 px-4 bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-700 hover:to-emerald-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all flex justify-center items-center disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
