@@ -1,11 +1,11 @@
 "use client"
-import FractalHeader from "./FractalHeader"
+import FractalHeader from "../../FractalHeader"
 import { Link } from "react-router-dom";
 
 const methodFormTemplate = ({
   functionValue,
-  aValue,
-  bValue,
+  x0Value,
+  x1Value,
   tolValue,
   maxCountValue,
   onFunctionChange,
@@ -69,13 +69,13 @@ const methodFormTemplate = ({
           <div className="grid grid-cols-2 gap-5">
             <div className="space-y-2">
               <label htmlFor="extremo-a" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Extremo a
+                Valor inicial x0
               </label>
               <input
                 id="extremo-a"
                 type="number"
-                name="a"
-                value={aValue}
+                name="x0"
+                value={x0Value}
                 onChange={onAChange}
                 className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all shadow-sm text-gray-900 dark:text-white"
                 step="0.1"
@@ -85,13 +85,13 @@ const methodFormTemplate = ({
 
             <div className="space-y-2">
               <label htmlFor="extremo-b" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Extremo b
+                Valor inicial x1
               </label>
               <input
                 id="extremo-b"
                 type="number"
-                name="b"
-                value={bValue}
+                name="x1"
+                value={x1Value}
                 onChange={onBChange}
                 className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all shadow-sm text-gray-900 dark:text-white"
                 step="0.1"

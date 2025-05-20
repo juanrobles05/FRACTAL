@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { ArrowLeft, HelpCircle, Info } from "lucide-react"
 import { Link } from "react-router-dom"
-import MethodFormTemplate from "../methodFormTemplate"
-import MethodResults from "../methodResults"
-import api from "../../api/config"
+import MethodFormTemplate from "./methodForm"
+import MethodResults from "../../methods/reglafalsa/methodResults"
+import api from "../../../api/config"
 
 const reglaFalsa = () => {
   const [formData, setFormData] = useState({
@@ -50,6 +50,7 @@ const reglaFalsa = () => {
       api.post('calculations/reglaFalsa/', requestData)
         .then(response => {
           setResults(response.data);
+          console.log(response.data)
           setIsLoading(false);
         })
         .catch(err => {
