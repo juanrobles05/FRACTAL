@@ -167,8 +167,8 @@ const secante = () => {
                 tolValue={formData.tol}
                 maxCountValue={formData.max_count}
                 onFunctionChange={(e) => handleChange({ target: { name: "function", value: e.target.value } })}
-                onAChange={(e) => handleChange({ target: { name: "a", value: e.target.value } })}
-                onBChange={(e) => handleChange({ target: { name: "b", value: e.target.value } })}
+                onAChange={(e) => handleChange({ target: { name: "x0", value: e.target.value } })}
+                onBChange={(e) => handleChange({ target: { name: "x1", value: e.target.value } })}
                 onTolChange={(e) => handleChange({ target: { name: "tol", value: e.target.value } })}
                 onMaxCountChange={(e) => handleChange({ target: { name: "max_count", value: e.target.value } })}
                 onSubmit={handleSubmit}
