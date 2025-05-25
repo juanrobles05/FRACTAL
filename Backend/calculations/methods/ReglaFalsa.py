@@ -50,12 +50,13 @@ def false_position_method(function_text, a, b, tol, max_count):
     ])
 
     while error > tol and count < max_count:
-        if fx_r < 0:
-            a = x_r
-        elif fx_r > 0:
+        if f(a) * fx_r < 0:
             b = x_r
+        elif f(b) * fx_r < 0:
+            a = x_r
         else:
             break  # encontramos la raíz exacta
+
 
         count += 1
         temp = x_r

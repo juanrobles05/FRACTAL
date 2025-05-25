@@ -39,7 +39,7 @@ def multiple_roots_method(function_text, first_derivate_text, second_derivate_te
 
     results['iterations'] = [[
         cont,
-        f"{x0:.10f}",
+        f"{x0:.10e}",
         f"{f_x:.2e}",
         ""
     ]]
@@ -72,9 +72,9 @@ def multiple_roots_method(function_text, first_derivate_text, second_derivate_te
             f"{err:.2e}"
         ])
 
-    if abs(f_x) == 0:
+    if abs(f_x) < 1e-15:
         results['conclusion'] = f"The root was found for x = {x0:.15f}"
-    elif not(err <= tol):
+    elif err <= tol:
         results['conclusion'] = f"An approximation of the root was found for x = {x0:.15f}"
     elif cont >= max_count:
         results['conclusion'] = "Given the number of iterations and the tolerance, it was impossible to find a satisfying root"
