@@ -195,7 +195,7 @@ function home() {
             </Link>
 
             {/* Método 4 */}
-            <Link to="/metodos/biseccion" className="group">
+            <Link to="/metodos/raices-multiples" className="group">
               <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
                 <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
                 <div className="p-6">
@@ -203,7 +203,7 @@ function home() {
                     <div className="h-10 w-10 rounded-lg bg-teal-500/20 flex items-center justify-center mr-3">
                       {/* svg personalizado*/}
                     </div>
-                    <h3 className="px-2 text-xl font-bold text-white">Método de Bisección</h3>
+                    <h3 className="px-2 text-xl font-bold text-white">Método de Raíces Múltiples</h3>
                   </div>
                   <p className="text-gray-400 mb-6">
                     Divide repetidamente el intervalo a la mitad y selecciona el subintervalo donde ocurre el cambio de
