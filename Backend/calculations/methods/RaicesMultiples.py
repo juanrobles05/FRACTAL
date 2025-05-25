@@ -1,27 +1,40 @@
 import math
+from sympy import sympify, lambdify, Symbol
 
-def calculate_multiple_roots(funct, first_derivate, second_derivate, x0, tol=1e-7, max_count=100):
+def multiple_roots_method(function_text, first_derivate_text, second_derivate_text, x0, tol, max_count):
     results = {
         'iterations': [],
         'conclusion': None
     }
 
-    # Verificar si x0 está en el dominio de la función
-    try:
-        f_x = funct(x0)
-    except:
-        raise ValueError(f"x0 isn't defined in the domain of the function f: x0 = {x0}")
-
+    # Validaciones iniciales
     if max_count < 0:
         raise ValueError(f"Max iterations is < 0: iterations = {max_count}")
     if tol < 0:
         raise ValueError(f"tol is an incorrect value: tol = {tol}")
 
-    f_xp = first_derivate(x0)
-    f_xs = second_derivate(x0)
+    # Preparar las funciones usando sympy
+    x = Symbol('x')
+    try:
+        f_expr = sympify(function_text)
+        f = lambdify(x, f_expr, 'math')
+        f1_expr = sympify(first_derivate_text)
+        f1 = lambdify(x, f1_expr, 'math')
+        f2_expr = sympify(second_derivate_text)
+        f2 = lambdify(x, f2_expr, 'math')
+    except Exception:
+        raise ValueError("Invalid function or derivative expression")
+
+    # Verificar si x0 está en el dominio de la función y derivadas
+    try:
+        f_x = f(x0)
+        f_xp = f1(x0)
+        f_xs = f2(x0)
+    except Exception:
+        raise ValueError(f"x0 isn't defined in the domain of the function or its derivatives: x0 = {x0}")
+
     err = tol + 1
     d = f_xp**2 - f_x * f_xs
-
     cont = 0
 
     results['iterations'] = [[
@@ -41,15 +54,16 @@ def calculate_multiple_roots(funct, first_derivate, second_derivate, x0, tol=1e-
             raise ValueError(f"Infinity value in step {cont}")
 
         try:
-            f_x = funct(x_ev)
-            f_xp = first_derivate(x_ev)
-            f_xs = second_derivate(x_ev)
-        except:
+            f_x = f(x_ev)
+            f_xp = f1(x_ev)
+            f_xs = f2(x_ev)
+        except Exception:
             raise ValueError(f"xi isn't defined in the domain of the function or its derivatives: xi = {x_ev}")
 
         err = abs(x_ev - x0)
         cont += 1
         x0 = x_ev
+        d = f_xp**2 - f_x * f_xs
 
         results['iterations'].append([
             cont,
@@ -58,9 +72,9 @@ def calculate_multiple_roots(funct, first_derivate, second_derivate, x0, tol=1e-
             f"{err:.2e}"
         ])
 
-    if abs(f_x) < tol:
+    if abs(f_x) == 0:
         results['conclusion'] = f"The root was found for x = {x0:.15f}"
-    elif err <= tol:
+    elif not(err <= tol):
         results['conclusion'] = f"An approximation of the root was found for x = {x0:.15f}"
     elif cont >= max_count:
         results['conclusion'] = "Given the number of iterations and the tolerance, it was impossible to find a satisfying root"

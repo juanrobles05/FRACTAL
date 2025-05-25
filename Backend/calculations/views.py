@@ -74,7 +74,7 @@ def calculate_multiple_roots(request):
         max_count = int(data.get('max_count'))
 
         # Validar que los datos sean correctos.
-        if not function_text or x0 is None or tol is None or max_count is None:
+        if not function_text or not first_derivate_text or not second_derivate_text or x0 is None or tol is None or max_count is None:
             return Response({"error": "Faltan parámetros"}, status=400)
 
         # Llamar a la función del método de Raíces Múltiples.

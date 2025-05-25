@@ -5,5 +5,5 @@ urlpatterns = [
     path('test/', test_calculations, name='test_calculations'),
     path('reglaFalsa/', calculate_regla_falsa, name='calculate_regla_falsa'),
     path('secante/', calculate_secant, name='calculate_secant'),
-    path('multipleRaices/', calculate_multiple_roots, name='calculate_multiple_roots')
+    path('raicesMultiples/', calculate_multiple_roots, name='calculate_multiple_roots')
 ]
