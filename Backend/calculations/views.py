@@ -88,7 +88,7 @@ def calculate_multiple_roots(request):
     except Exception as e:
         return Response({"error": "Error inesperado: " + str(e)}, status=500)
 
-api_view(['POST'])
+@api_view(['POST'])
 def calculate_biseccion(request):
 
     try:
