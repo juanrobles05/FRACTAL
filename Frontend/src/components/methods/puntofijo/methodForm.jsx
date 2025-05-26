@@ -1,16 +1,55 @@
 import FractalHeader from "../../FractalHeader"
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import Algebrite from "algebrite"
 
 const getGSuggestions = (fStr) => {
   const x = "x"
-  return [
+  // Manipulaciones básicas
+  const basicas = [
     { desc: "g(x) = x + f(x)", expr: `(${x}) + (${fStr})` },
     { desc: "g(x) = x - f(x)", expr: `(${x}) - (${fStr})` },
     { desc: "g(x) = x + k·f(x)", expr: `(${x}) + k*(${fStr})` },
     { desc: "g(x) = x·f(x)", expr: `(${x})*(${fStr})` },
     { desc: "g(x) = x/f(x)", expr: `(${x})/(${fStr})` },
   ]
+
+  // Simplificaciones directas usando Algebrite
+  let simplificaciones = []
+  try {
+    const simp = Algebrite.run(`simplify((${fStr}) + (${x}))`)
+    simplificaciones = [
+      { desc: "g(x) = Simplificación de f(x) + x", expr: simp }
+    ]
+  } catch {
+    simplificaciones = [
+      { desc: "g(x) = Simplificación de f(x) + x", expr: `simplify((${fStr}) + (${x}))` }
+    ]
+  }
+
+  // Soluciones algebraicas usando Algebrite
+  let algebraicas = []
+  try {
+    const sol = Algebrite.run(`roots((${fStr}), ${x})`)
+    const matches = sol.match(/\[([^\]]*)\]/)
+    if (matches && matches[1].trim() !== "") {
+      const sols = matches[1].split(",").map(s => s.trim())
+      algebraicas = sols.map((expr, i) => ({
+        desc: `Solución algebraica ${i + 1}`,
+        expr
+      }))
+    } else {
+      algebraicas = [
+        { desc: "Solución algebraica", expr: "No se encontraron soluciones" }
+      ]
+    }
+  } catch {
+    algebraicas = [
+      { desc: "Solución algebraica", expr: "No se pudo resolver en frontend" }
+    ]
+  }
+
+  return [...basicas, ...simplificaciones, ...algebraicas]
 }
 
 const methodFormTemplate = ({

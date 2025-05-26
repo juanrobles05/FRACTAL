@@ -68,7 +68,9 @@ const puntofijo = () => {
         max_count: Number.parseInt(formData.max_count),
       }
 
-      api.post('calculations/puntofijo/', requestData)
+      console.log("Datos enviados a la API:", requestData)
+
+      api.post('calculations/puntoFijo/', requestData)
         .then(response => {
           setResults(response.data)
           setIsLoading(false)
