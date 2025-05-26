@@ -4,6 +4,7 @@ import ReglaFalsa from "./components/methods/reglafalsa/reglaFalsa"
 import Graficador from "./components/methods/graficador"
 import Secante from "./components/methods/secante/secante"
 import RaicesMultiples from "./components/methods/raicesmultiples/raicesmultiples"
+import Biseccion from "./components/methods/biseccion/biseccion"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/graficador" element={<Graficador />} />
         <Route path="/metodos/secante" element={<Secante />} />
         <Route path="/metodos/raices-multiples" element={<RaicesMultiples/>} />
+        <Route path="/metodos/biseccion" element={<Biseccion />} />
         {/* Otras rutas */}
       </Routes>
     </div>
