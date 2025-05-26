@@ -8,9 +8,11 @@ def bisection_method(function_text, a, b, tol, max_count):
 
     # Validaciones iniciales
     if max_count < 0:
-        raise ValueError(f"Max iterations is < 0: iterations = {max_count}")
+        results['conclusion'] = f"Max iterations is < 0: iterations = {max_count}"
+        return results
     if tol < 0:
-        raise ValueError(f"tol is an incorrect value: tol = {tol}")
+        results['conclusion'] = f"tol is an incorrect value: tol = {tol}"
+        return results
 
     # Preparar la función
     x = Symbol('x')
@@ -18,14 +20,16 @@ def bisection_method(function_text, a, b, tol, max_count):
         expr = sympify(function_text)
         f = lambdify(x, expr, 'math')
     except:
-        raise ValueError("Invalid function expression")
+        results['conclusion'] = "Invalid function expression"
+        return results
 
     # Verificar puntos iniciales
     try:
         fi = f(a)
         fs = f(b)
     except:
-        raise ValueError("a or b isn't defined in the function domain")
+        results['conclusion'] = "a or b isn't defined in the function domain"
+        return results
 
     # Casos especiales (raíces en los extremos)
     if fi == 0:
@@ -37,7 +41,8 @@ def bisection_method(function_text, a, b, tol, max_count):
         results['conclusion'] = f"{b:.15f} is a root of f(x)"
         return results
     if fi * fs > 0:
-        raise ValueError("The interval is inadequate; function does not change sign")
+        results['conclusion'] = "The interval is inadequate; function does not change sign"
+        return results
 
     count = 0
     error = tol + 1
@@ -54,7 +59,7 @@ def bisection_method(function_text, a, b, tol, max_count):
         ""
     ])
 
-    while error > tol and abs(fm) > 1e-14 and count < max_count:
+    while error > tol and abs(fm) > tol and count < max_count:
         if fi * fm < 0:
             b = xm
             fs = fm
