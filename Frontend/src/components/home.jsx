@@ -148,26 +148,15 @@ function home() {
                         <line x1="2" y1="18" x2="22" y2="18" strokeWidth="1.5" />
                         <line x1="4" y1="2" x2="4" y2="22" strokeWidth="1.5" />
 
-                        {/* Curva de la función */}
-                        <path d="M2,14 Q7,6 12,14 Q17,22 22,10" strokeWidth="1.5" />
+                        {/* Línea y = x (diagonal) */}
+                        <line x1="4" y1="18" x2="18" y2="4" strokeWidth="1.5" stroke="#14b8a6" strokeDasharray="3 2" />
 
-                        {/* Puntos x₀ y x₁ en la curva */}
-                        <circle cx="7" cy="10" r="1.5" fill="#2dd4bf" />
-                        <circle cx="17" cy="16" r="1.5" fill="#2dd4bf" />
+                        {/* Curva g(x) simple */}
+                        <path d="M6,14 Q12,8 18,12" strokeWidth="1.5" />
 
-                        {/* Línea secante entre los dos puntos */}
-                        <line x1="7" y1="10" x2="17" y2="16" strokeWidth="1.5" stroke="#14b8a6" />
+                        {/* Punto fijo (intersección) */}
+                        <circle cx="12" cy="10" r="2" fill="#2dd4bf" />
 
-                        {/* Punto de intersección con el eje x (x₂) */}
-                        <circle cx="12" cy="18" r="1.5" fill="#34d399" />
-
-                        {/* Línea vertical punteada desde x₂ */}
-                        <line x1="12" y1="18" x2="12" y2="14" strokeWidth="1" strokeDasharray="2 1" stroke="#14b8a6" />
-
-                        {/* Etiquetas pequeñas */}
-                        <text x="6" y="8.5" fontSize="3" fill="currentColor">x₀</text>
-                        <text x="18" y="15" fontSize="3" fill="currentColor">x₁</text>
-                        <text x="12.5" y="20" fontSize="3" fill="currentColor">x₂</text>
                       </svg>
                     </div>
                     <h3 className="px-2 text-xl font-bold text-white">Punto Fijo</h3>
