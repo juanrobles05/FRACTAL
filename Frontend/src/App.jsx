@@ -6,6 +6,7 @@ import Secante from "./components/methods/secante/secante"
 import RaicesMultiples from "./components/methods/raicesmultiples/raicesmultiples"
 import Biseccion from "./components/methods/biseccion/biseccion"
 import Puntofijo from "./components/methods/puntofijo/puntofijo"
+import Newton from "./components/methods/newton/newton"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/metodos/raices-multiples" element={<RaicesMultiples/>} />
         <Route path="/metodos/biseccion" element={<Biseccion />} />
         <Route path="/metodos/punto-fijo" element={<Puntofijo />} />
+        <Route path="/metodos/newton" element={<Newton />} />
         {/* Otras rutas */}
       </Routes>
     </div>
