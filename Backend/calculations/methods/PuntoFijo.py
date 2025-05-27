@@ -1,97 +1,63 @@
-import math
+from sympy import sympify, lambdify, Symbol
 
-def str_to_function(expr):
-    """
-    Convierte una expresión en string a una función lambda de una variable x.
-    Se incluye el módulo math en el contexto.
-    """
-    return lambda x: eval(expr, {"x": x, "math": math})
+def fixed_point_method(function_text, g_function_text, x0, tol, max_count, relative=False):
+    results = {
+        'iterations': [],
+        'conclusion': None
+    }
 
-def puntofijoDC(x0, tol, niter, fun, g):
-    # Método de Punto Fijo con error absoluto
-    x = x0
-    f_val = fun(x)
-    i = 0
-    error = 100
-    results = [(i, x, f_val, error)]
-    
-    while error > tol and f_val != 0 and i < niter:
-        x_new = g(x)
-        f_val = fun(x_new)
-        error = abs(x_new - x)
-        x = x_new
-        i += 1
-        results.append((i, x, f_val, error))
-    
-    # Mostrar resultados en formato tabla
-    print("\n   i        Xn            F(Xn)         Error")
-    for row in results:
-        print("{:4d}  {:12.8f}  {:12.8f}  {:12.8f}".format(*row))
-    
-    if f_val == 0:
-        print("\n{} es una raíz de f(x)".format(x))
-    elif error <= tol:
-        print("\n{} es una aproximación de una raíz con tolerancia {}".format(x, tol))
-    else:
-        print("\nFracaso en {} iteraciones".format(niter))
+    if max_count < 0:
+        raise ValueError(f"Max iterations is < 0: iterations = {max_count}")
+    if tol < 0:
+        raise ValueError(f"tol is an incorrect value: tol = {tol}")
 
-def puntofijoCS(x0, tol, niter, fun, g):
-    # Método de Punto Fijo con error relativo
-    x = x0
-    f_val = fun(x)
-    i = 0
-    error = 100
-    results = [(i, x, f_val, error)]
-    
-    while error >= tol and f_val != 0 and i < niter:
-        x_new = g(x)
-        f_val = fun(x_new)
-        # Evitar división por cero
-        if x_new != 0:
-            error = abs((x_new - x) / x_new)
-        else:
-            error = float('inf')
-        x = x_new
-        i += 1
-        results.append((i, x, f_val, error))
-    
-    # Mostrar resultados en formato tabla
-    print("\n   i        Xn            F(Xn)         Error")
-    for row in results:
-        print("{:4d}  {:12.8f}  {:12.8f}  {:12.8f}".format(*row))
-    
-    if f_val == 0:
-        print("\n{} es una raíz de f(x)".format(x))
-    elif error < tol:
-        print("\n{} es una aproximación de una raíz con tolerancia {}".format(x, tol))
-    else:
-        print("\nFracaso en {} iteraciones".format(niter))
-
-def main():
-    # Solicitar parámetros al usuario
+    x = Symbol('x')
     try:
-        x0 = float(input("Ingrese el valor inicial x0: "))
-        tol = float(input("Ingrese la tolerancia: "))
-        niter = int(input("Ingrese el número máximo de iteraciones: "))
-        
-        expr_fun = input("Ingrese la función f(x): ")
-        expr_g = input("Ingrese la función de iteración g(x): ")
-        expr_df = input("Ingrese la función derivada f'(x): ")  # No es utilizada en este ejemplo
-        intervalo = input("Ingrese el intervalo [a,b] (separado por coma): ")
-        a, b = [float(val) for val in intervalo.split(",")]
-    except Exception as e:
-        print("Error en la entrada de datos:", e)
-        return
+        f_expr = sympify(function_text)
+        g_expr = sympify(g_function_text)
+        f = lambdify(x, f_expr, 'math')
+        g = lambdify(x, g_expr, 'math')
+    except:
+        raise ValueError("Invalid function or iteration expression")
 
-    # Crear las funciones a partir de las expresiones ingresadas
-    fun = str_to_function(expr_fun)
-    g = str_to_function(expr_g)
-    
-    print("\nEjecutando puntofijoDC (error absoluto):")
-    puntofijoDC(x0, tol, niter, fun, g)
-    
-    print("\nEjecutando puntofijoCS (error relativo):")
-    puntofijoCS(x0, tol, niter, fun, g)
+    try:
+        fx = f(x0)
+    except:
+        raise ValueError("x0 isn't defined in the function domain")
 
-if __name__ == "__main__":
-    main()
+    count = 0
+    error = tol + 1
+
+    results['iterations'].append([
+        count,
+        "{:.10f}".format(x0),
+        "{:.2e}".format(fx),
+        ""
+    ])
+
+    while ((error > tol) if not relative else (error >= tol)) and abs(fx) > 1e-14 and count < max_count:
+        x1 = g(x0)
+        fx = f(x1)
+        error = abs(x1 - x0) if not relative else abs((x1 - x0) / x1)
+
+        count += 1
+        results['iterations'].append([
+            count,
+            "{:.10f}".format(x1),
+            "{:.2e}".format(fx),
+            "{:.2e}".format(error)
+        ])
+
+        x0 = x1
+
+    if abs(fx) <= 1e-14:
+        results['conclusion'] = f"{x0:.15f} is a root of f(x)"
+    elif error <= tol:
+        results['conclusion'] = f"An approximation of the root was found for x = {x0:.15f} with tolerance {tol}"
+    elif count >= max_count:
+        results['conclusion'] = f"Failed to converge after {max_count} iterations"
+    else:
+        results['conclusion'] = "The method exploded"
+
+    return results
+
