@@ -9,9 +9,11 @@ def multiple_roots_method(function_text, first_derivate_text, second_derivate_te
 
     # Validaciones iniciales
     if max_count < 0:
-        raise ValueError(f"Max iterations is < 0: iterations = {max_count}")
+        results['conclusion'] = f"Max iterations is < 0: iterations = {max_count}"
+        return results
     if tol < 0:
-        raise ValueError(f"tol is an incorrect value: tol = {tol}")
+        results['conclusion'] = f"tol is an incorrect value: tol = {tol}"
+        return results
 
     # Preparar las funciones usando sympy
     x = Symbol('x')
@@ -23,7 +25,8 @@ def multiple_roots_method(function_text, first_derivate_text, second_derivate_te
         f2_expr = sympify(second_derivate_text)
         f2 = lambdify(x, f2_expr, 'math')
     except Exception:
-        raise ValueError("Invalid function or derivative expression")
+        results['conclusion'] = "Invalid function or derivative expression"
+        return results
 
     # Verificar si x0 está en el dominio de la función y derivadas
     try:
@@ -31,7 +34,8 @@ def multiple_roots_method(function_text, first_derivate_text, second_derivate_te
         f_xp = f1(x0)
         f_xs = f2(x0)
     except Exception:
-        raise ValueError(f"x0 isn't defined in the domain of the function or its derivatives: x0 = {x0}")
+        results['conclusion'] = f"x0 isn't defined in the domain of the function or its derivatives: x0 = {x0}"
+        return results
 
     err = tol + 1
     d = f_xp**2 - f_x * f_xs
@@ -48,17 +52,20 @@ def multiple_roots_method(function_text, first_derivate_text, second_derivate_te
         try:
             x_ev = x0 - (f_x * f_xp) / (f_xp**2 - f_x * f_xs)
         except ZeroDivisionError:
-            raise ValueError(f"Division by zero in step {cont}")
+            results['conclusion'] = f"Division by zero in step {cont}"
+            return results
 
         if math.isinf(x_ev):
-            raise ValueError(f"Infinity value in step {cont}")
+            results['conclusion'] = f"Infinity value in step {cont}"
+            return results
 
         try:
             f_x = f(x_ev)
             f_xp = f1(x_ev)
             f_xs = f2(x_ev)
         except Exception:
-            raise ValueError(f"xi isn't defined in the domain of the function or its derivatives: xi = {x_ev}")
+            results['conclusion'] = f"xi isn't defined in the domain of the function or its derivatives: xi = {x_ev}"
+            return results
 
         err = abs(x_ev - x0)
         cont += 1
@@ -72,12 +79,12 @@ def multiple_roots_method(function_text, first_derivate_text, second_derivate_te
             f"{err:.2e}"
         ])
 
-    if abs(f_x) < 1e-15:
-        results['conclusion'] = f"The root was found for x = {x0:.15f}"
+    if abs(f_x) == 0:
+        results['conclusion'] = f"The root was found for x{cont} = {x0:.15f}"
     elif err <= tol:
-        results['conclusion'] = f"An approximation of the root was found for x = {x0:.15f}"
+        results['conclusion'] = f"An approximation of the root was found for x{cont} = {x0:.15f}"
     elif cont >= max_count:
-        results['conclusion'] = "Given the number of iterations and the tolerance, it was impossible to find a satisfying root"
+        results['conclusion'] = f"Failed to converge after {max_count} iterations"
     else:
         results['conclusion'] = "The method exploded"
 

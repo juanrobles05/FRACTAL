@@ -45,7 +45,7 @@ def fixed_point_method(function_text, g_function_text, x0, tol, max_count):
         ""
     ])
 
-    while err > tol and abs(fx) > 1e-15 and count < max_count:
+    while err > tol and abs(fx) != 0 and count < max_count:
         try:
             x_next = g(x0)
         except Exception:
@@ -67,10 +67,10 @@ def fixed_point_method(function_text, g_function_text, x0, tol, max_count):
         ])
 
     # Determinar conclusión
-    if abs(fx) <= 1e-15:
-        results['conclusion'] = f"{x0:.15f} is a root of f(x)"
+    if abs(fx) == 0:
+        results['conclusion'] = f"The root was found for x{count} = {x0:.15f}"
     elif err <= tol:
-        results['conclusion'] = f"An approximation of the root was found for x = {x0:.15f}"
+        results['conclusion'] = f"An approximation of the root was found for x{count} = {x0:.15f}"
     elif count >= max_count:
         results['conclusion'] = f"Failed to converge after {max_count} iterations"
     else:

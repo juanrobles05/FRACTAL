@@ -40,7 +40,7 @@ def newton_method(function_text, derivative_text, x0, tol, max_count):
         ""
     ])
 
-    while error > tol and abs(fx) > 1e-14 and abs(dfx) > 1e-14 and count < max_count:
+    while error > tol and abs(fx) != 0 and abs(dfx) != 0 and count < max_count:
         try:
             x1 = x0 - fx / dfx
         except ZeroDivisionError:
@@ -63,10 +63,10 @@ def newton_method(function_text, derivative_text, x0, tol, max_count):
         fx = fx1
         dfx = dfx1
 
-    if abs(fx) <= 1e-14:
-        results['conclusion'] = f"{x0:.15f} is a root of f(x)"
+    if abs(fx) == 0:
+        results['conclusion'] = f"The root was found for x{count} = {x0:.15f}"
     elif error <= tol:
-        results['conclusion'] = f"An approximation of the root was found for x = {x0:.15f} with tolerance {tol}"
+        results['conclusion'] = f"An approximation of the root was found for x{count} = {x0:.15f}"
     elif count >= max_count:
         results['conclusion'] = f"Failed to converge after {max_count} iterations"
     else:

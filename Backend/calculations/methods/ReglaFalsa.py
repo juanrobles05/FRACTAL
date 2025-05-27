@@ -8,11 +8,14 @@ def false_position_method(function_text, a, b, tol, max_count):
 
     # Validaciones iniciales
     if max_count < 0:
-        raise ValueError(f"Max iterations is < 0: iterations = {max_count}")
+        results['conclusion'] = f"Max iterations is < 0: iterations = {max_count}"
+        return results
     if a >= b:
-        raise ValueError(f"a has to be less than b: a = {a} ^ b = {b}")
+        results['conclusion'] = f"a has to be less than b: a = {a} ^ b = {b}"
+        return results
     if tol < 0:
-        raise ValueError(f"tol is an incorrect value: tol = {tol}")
+        results['conclusion'] = f"tol is an incorrect value: tol = {tol}"
+        return results
 
     # Preparar la función
     x = Symbol('x')
@@ -20,21 +23,36 @@ def false_position_method(function_text, a, b, tol, max_count):
         expr = sympify(function_text)
         f = lambdify(x, expr, 'math')
     except:
-        raise ValueError("Invalid function expression")
+        results['conclusion'] = "Invalid function expression"
+        return results
 
-    # Verificar que a y b estén en el dominio
     try:
-        f(a)
-        f(b)
-    except:
-        raise ValueError("a or b isn't defined in the function domain")
+        fa = f(a)
+        fb = f(b)
+    except Exception:
+        results['conclusion'] = "a or b isn't defined in the function domain"
+        return results
 
-    count = 1
+    # Casos especiales (raíces en los extremos)
+    if fa == 0:
+        results['iterations'].append([0, a, a, b, fa, 0])
+        results['conclusion'] = f"{a:.15f} is a root of f(x)"
+        return results
+    if fb == 0:
+        results['iterations'].append([0, a, b, b, fb, 0])
+        results['conclusion'] = f"{b:.15f} is a root of f(x)"
+        return results
+    if fa * fb > 0:
+        results['conclusion'] = "The interval is inadequate; function does not change sign"
+        return results
+
+    count = 0
     try:
         x_r = b - (f(b) * (b - a)) / (f(b) - f(a))
         fx_r = f(x_r)
     except ZeroDivisionError:
-        raise ValueError("Division by zero occurred - possibly same sign at endpoints")
+        results['conclusion'] = "Division by zero occurred - possibly same sign at endpoints"
+        return results
 
     error = tol + 1
     temp = 0
@@ -65,7 +83,8 @@ def false_position_method(function_text, a, b, tol, max_count):
             x_r = b - (f(b) * (b - a)) / (f(b) - f(a))
             fx_r = f(x_r)
         except ZeroDivisionError:
-            raise ValueError("Division by zero occurred - possibly same sign at endpoints")
+            results['conclusion'] = "Division by zero occurred - possibly same sign at endpoints"
+            return results
 
         error = abs(x_r - temp)
 
@@ -74,7 +93,8 @@ def false_position_method(function_text, a, b, tol, max_count):
             f(a)
             f(b)
         except:
-            raise ValueError("Interval endpoint isn't defined in the function domain during iteration")
+            results['conclusion'] = "Interval endpoint isn't defined in the function domain during iteration"
+            return results
 
         results['iterations'].append([
             count,
@@ -85,12 +105,14 @@ def false_position_method(function_text, a, b, tol, max_count):
             "{:.2e}".format(error)
         ])
 
+    print(fx_r)
     # Determinar conclusión
-    if error <= tol:
+    if abs(fx_r) == 0:
+        results['conclusion'] = f"The root was found for m = {x_r:.15f}"
+    elif error <= tol:
         results['conclusion'] = f"An approximation of the root was found for m = {x_r:.15f}"
     elif count >= max_count:
-        results['conclusion'] = ("Given the number of iterations and the tolerance, "
-                               "it was impossible to find a satisfying root")
+        results['conclusion'] = f"Failed to converge after {max_count} iterations"
     else:
         results['conclusion'] = "The method exploded"
 

@@ -52,14 +52,14 @@ def bisection_method(function_text, a, b, tol, max_count):
     # Primera iteración
     results['iterations'].append([
         count,
-        float(a),
-        float(xm),
-        float(b),
-        float(fm),
+        round(a, 10),
+        round(xm, 10),
+        round(b, 10),
+        "{:.2e}".format(fm),
         ""
     ])
 
-    while error > tol and abs(fm) > tol and count < max_count:
+    while error > tol and abs(fm) != 0 and count < max_count:
         if fi * fm < 0:
             b = xm
             fs = fm
@@ -76,18 +76,18 @@ def bisection_method(function_text, a, b, tol, max_count):
         # Agregar datos de la iteración
         results['iterations'].append([
             count,
-            float(a),
-            float(xm),
-            float(b),
-            float(fm),
-            float(error)
+            round(a,10),
+            round(xm,10),
+            round(b,10),
+            "{:.2e}".format(fm),
+            "{:.2e}".format(error)
         ])
 
     # Determinar conclusión
-    if abs(fm) <= 1e-15:
-        results['conclusion'] = f"{xm:.15f} is a root of f(x)"
+    if abs(fm) == 0:
+        results['conclusion'] = f"The root was found for x{count} = {xm:.15f}"
     elif error <= tol:
-        results['conclusion'] = f"An approximation of the root was found for x = {xm:.15f}"
+        results['conclusion'] = f"An approximation of the root was found for x{count} = {xm:.15f}"
     elif count >= max_count:
         results['conclusion'] = f"Failed to converge after {max_count} iterations"
     else:

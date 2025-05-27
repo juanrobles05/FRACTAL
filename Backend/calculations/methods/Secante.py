@@ -47,7 +47,7 @@ def secant_method(function_text, x0, x1, tol, max_count):
         round(abs(x1 - x0), 10)
     ])
 
-    while error > tol and count < max_count:
+    while error > tol and fx1 != 0 and count < max_count:
         if abs(fx1 - fx0) < 1e-20:  # Evitar división por cero
             raise ValueError("Division by zero occurred - possible same function values at points")
 
@@ -69,8 +69,11 @@ def secant_method(function_text, x0, x1, tol, max_count):
         fx0, fx1 = fx1, fx2
 
     # Determinar conclusión
-    if error <= tol:
-        results['conclusion'] = f"An approximation of the root was found for x = {x1:.15f}"
+    if abs(fx1) == 0:
+        results['conclusion'] = f"The root was found for x{count} = {x1:.15f}"
+        return results
+    elif error <= tol:
+        results['conclusion'] = f"An approximation of the root was found for x{count} = {x1:.15f}"
     elif count >= max_count:
         results['conclusion'] = ("Given the number of iterations and the tolerance, "
                                "it was impossible to find a satisfying root")
