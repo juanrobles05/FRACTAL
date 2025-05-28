@@ -181,8 +181,6 @@ def calculate_jacobi(request):
         tol = float(data.get('tol'))
         max_count = int(data.get('max_count'))
 
-        print(data)
-
         # Validar que los datos sean correctos.
         if not matrixA or not vectorB or not vectorX0 or tol is None or max_count is None:
             return Response({"error": "Faltan parámetros"}, status=400)
@@ -193,10 +191,8 @@ def calculate_jacobi(request):
         return Response(results, status=200)
 
     except ValueError as e:
-        print(e)
         return Response({"error": str(e)}, status=400)
     except Exception as e:
-        print(e)
         return Response({"error": "Error inesperado: " + str(e)}, status=500)
 
 @api_view(['POST'])
@@ -211,8 +207,6 @@ def calculate_gaussSeidel(request):
         tol = float(data.get('tol'))
         max_count = int(data.get('max_count'))
 
-        print(data)
-
         # Validar que los datos sean correctos.
         if not matrixA or not vectorB or not vectorX0 or tol is None or max_count is None:
             return Response({"error": "Faltan parámetros"}, status=400)
@@ -223,8 +217,6 @@ def calculate_gaussSeidel(request):
         return Response(results, status=200)
 
     except ValueError as e:
-        print(e)
         return Response({"error": str(e)}, status=400)
     except Exception as e:
-        print(e)
         return Response({"error": "Error inesperado: " + str(e)}, status=500)
