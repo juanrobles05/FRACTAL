@@ -7,6 +7,7 @@ import RaicesMultiples from "./components/methods/raicesmultiples/raicesmultiple
 import Biseccion from "./components/methods/biseccion/biseccion"
 import Puntofijo from "./components/methods/puntofijo/puntofijo"
 import Newton from "./components/methods/newton/newton"
+import Informe from "./components/ComparativeReportGenerator"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/metodos/biseccion" element={<Biseccion />} />
         <Route path="/metodos/punto-fijo" element={<Puntofijo />} />
         <Route path="/metodos/newton" element={<Newton />} />
+        <Route path="/informe" element={<Informe />} />
         {/* Otras rutas */}
       </Routes>
     </div>
