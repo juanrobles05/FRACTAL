@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 function home() {
+  const [openCap1, setOpenCap1] = useState(false);
+  const [openCap2, setOpenCap2] = useState(false);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950">
+    <div className="w-screen min-h-screen bg-gradient-to-b from-gray-900 to-gray-950">
       {/* Header */}
       <header className="pt-2 px-4 sm:px-6 lg:px-5">
         <div className="max-w-7xl mx-auto">
@@ -37,395 +41,63 @@ function home() {
 
       {/* Methods Section */}
       <section id="metodos" className="py-4 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
-        <div className=" mx-auto">
+        <div className="mx-auto">
           <div className="text-center mb-16">
             <h2 className="py-4 text-3xl md:text-4xl font-bold text-white mb-4">Métodos Numéricos</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Método 1 */}
-            <Link to="/metodos/biseccion" className="group">
-              <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
-                <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="h-10 w-10 rounded-lg bg-teal-500/20 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6 text-teal-400">
-                      {/* Eje X */}
-                      <line x1="2" y1="12" x2="22" y2="12" strokeWidth="1.5" />
-                      {/* Eje Y */}
-                      <line x1="12" y1="2" x2="12" y2="22" strokeWidth="1.5" />
-                      {/* Curva de función */}
-                      <path d="M2,18 Q7,0 12,12 Q17,24 22,6" strokeWidth="1.5" fill="none" />
-                      {/* Línea de bisección */}
-                      <line x1="7" y1="4" x2="17" y2="20" strokeWidth="1.5" strokeDasharray="2 1" />
-                      {/* Punto medio */}
-                      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
-                    </svg>
-                    </div>
-                    <h3 className="px-2 text-xl font-bold text-white">Método de Bisección</h3>
-                  </div>
-                  <p className="text-gray-400 mb-6">
-                    Divide repetidamente el intervalo a la mitad y selecciona el subintervalo donde ocurre el cambio de
-                    signo.
-                  </p>
-                  <div className="flex items-center text-teal-400 group-hover:text-teal-300">
-                    <span>Explorar método</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
+          <div className="flex flex-col md:flex-row gap-8 justify-center items-start">
+            {/* Capítulo 1 */}
+            <div className="w-full md:w-1/2">
+              <button
+                onClick={() => setOpenCap1(!openCap1)}
+                className="w-full bg-gray-800 rounded-xl shadow-lg border border-gray-700 hover:border-teal-500/50 transition-all duration-300 px-6 py-4 flex items-center justify-between text-left"
+              >
+                <span className="text-xl font-bold text-white">Capítulo 1: Métodos de una variable</span>
+                <svg
+                  className={`h-6 w-6 text-teal-400 transform transition-transform ${openCap1 ? "rotate-90" : ""}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+              {openCap1 && (
+                <div className="mt-4 space-y-4">
+                  <Link to="/metodos/biseccion" className="block bg-gray-700 hover:bg-teal-700/40 rounded-lg px-4 py-3 text-white font-medium transition-all">Método de Bisección</Link>
+                  <Link to="/metodos/regla-falsa" className="block bg-gray-700 hover:bg-teal-700/40 rounded-lg px-4 py-3 text-white font-medium transition-all">Regla Falsa</Link>
+                  <Link to="/metodos/punto-fijo" className="block bg-gray-700 hover:bg-teal-700/40 rounded-lg px-4 py-3 text-white font-medium transition-all">Punto Fijo</Link>
+                  <Link to="/metodos/newton" className="block bg-gray-700 hover:bg-teal-700/40 rounded-lg px-4 py-3 text-white font-medium transition-all">Newton</Link>
+                  <Link to="/metodos/secante" className="block bg-gray-700 hover:bg-teal-700/40 rounded-lg px-4 py-3 text-white font-medium transition-all">Secante</Link>
+                  <Link to="/metodos/raices-multiples" className="block bg-gray-700 hover:bg-teal-700/40 rounded-lg px-4 py-3 text-white font-medium transition-all">Raíces Múltiples</Link>
                 </div>
-              </div>
-            </Link>
-
-            {/* Método 2 */}
-            <Link to="/metodos/regla-falsa" className="group">
-              <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
-                <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="h-10 w-10 rounded-lg bg-teal-500/20 flex items-center justify-center mr-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6 text-teal-400">
-                        {/* Eje X */}
-                        <line x1="2" y1="18" x2="22" y2="18" strokeWidth="1.5" />
-                        {/* Curva de función */}
-                        <path d="M2,14 Q8,4 14,16 Q18,24 22,8" strokeWidth="1.5" fill="none" />
-                        {/* Puntos a y b */}
-                        <circle cx="4" cy="14" r="1.5" fill="currentColor" />
-                        <circle cx="20" cy="10" r="1.5" fill="currentColor" />
-                        {/* Línea secante */}
-                        <line x1="4" y1="14" x2="20" y2="10" strokeWidth="1.5" />
-                        {/* Punto de intersección con eje X */}
-                        <circle cx="12" cy="18" r="1.5" fill="currentColor" />
-                        {/* Línea vertical desde intersección */}
-                        <line x1="12" y1="18" x2="12" y2="15" strokeWidth="1" strokeDasharray="2 1" />
-                      </svg>
-                    </div>
-                    <h3 className="px-2 text-xl font-bold text-white">Regla Falsa</h3>
-                  </div>
-                  <p className="text-gray-400 mb-6">
-                    Utiliza interpolación lineal para estimar la raíz, combinando la robustez de la bisección con mayor
-                    velocidad.
-                  </p>
-                  <div className="flex items-center text-teal-400 group-hover:text-teal-300">
-                    <span>Explorar método</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
+              )}
+            </div>
+            {/* Capítulo 2 */}
+            <div className="w-full md:w-1/2">
+              <button
+                onClick={() => setOpenCap2(!openCap2)}
+                className="w-full bg-gray-800 rounded-xl shadow-lg border border-gray-700 hover:border-teal-500/50 transition-all duration-300 px-6 py-4 flex items-center justify-between text-left"
+              >
+                <span className="text-xl font-bold text-white">Capítulo 2: Métodos de matrices</span>
+                <svg
+                  className={`h-6 w-6 text-teal-400 transform transition-transform ${openCap2 ? "rotate-90" : ""}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+              {openCap2 && (
+                <div className="mt-4 space-y-4">
+                  <Link to="/metodos/cap2/jacobi" className="block bg-gray-700 hover:bg-teal-700/40 rounded-lg px-4 py-3 text-white font-medium transition-all">Jacobi</Link>
+                  <Link to="/metodos/cap2/gauss-seidel" className="block bg-gray-700 hover:bg-teal-700/40 rounded-lg px-4 py-3 text-white font-medium transition-all">Gauss-Seidel</Link>
+                  <Link to="/metodos/cap2/sor" className="block bg-gray-700 hover:bg-teal-700/40 rounded-lg px-4 py-3 text-white font-medium transition-all">SOR</Link>
                 </div>
-              </div>
-            </Link>
-
-            {/* Método 3 */}
-            <Link to="/metodos/punto-fijo" className="group">
-              <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
-                <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="h-10 w-10 rounded-lg bg-teal-500/20 flex items-center justify-center mr-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6 text-teal-400">
-                        {/* Ejes de coordenadas */}
-                        <line x1="2" y1="18" x2="22" y2="18" strokeWidth="1.5" />
-                        <line x1="4" y1="2" x2="4" y2="22" strokeWidth="1.5" />
-
-                        {/* Línea y = x (diagonal) */}
-                        <line x1="4" y1="18" x2="18" y2="4" strokeWidth="1.5" stroke="#14b8a6" strokeDasharray="3 2" />
-
-                        {/* Curva g(x) simple */}
-                        <path d="M6,14 Q12,8 18,12" strokeWidth="1.5" />
-
-                        {/* Punto fijo (intersección) */}
-                        <circle cx="12" cy="10" r="2" fill="#2dd4bf" />
-
-                      </svg>
-                    </div>
-                    <h3 className="px-2 text-xl font-bold text-white">Punto Fijo</h3>
-                  </div>
-                  <p className="text-gray-400 mb-6">
-                    Método iterativo que utiliza la derivada de la función para aproximarse rápidamente a la raíz.
-                  </p>
-                  <div className="flex items-center text-teal-400 group-hover:text-teal-300">
-                    <span>Explorar método</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </Link>
-
-            {/* Método 4 */}
-            <Link to="/metodos/newton" className="group">
-              <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
-                <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="h-10 w-10 rounded-lg bg-teal-500/20 flex items-center justify-center mr-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6 text-teal-400">
-                        {/* Ejes de coordenadas */}
-                        <line x1="2" y1="18" x2="22" y2="18" strokeWidth="1.5" />
-                        <line x1="4" y1="2" x2="4" y2="22" strokeWidth="1.5" />
-
-                        {/* Curva de la función */}
-                        <path d="M2,14 Q7,6 12,14 Q17,22 22,10" strokeWidth="1.5" />
-
-                        {/* Puntos x₀ y x₁ en la curva */}
-                        <circle cx="7" cy="10" r="1.5" fill="#2dd4bf" />
-                        <circle cx="17" cy="16" r="1.5" fill="#2dd4bf" />
-
-                        {/* Línea secante entre los dos puntos */}
-                        <line x1="7" y1="10" x2="17" y2="16" strokeWidth="1.5" stroke="#14b8a6" />
-
-                        {/* Punto de intersección con el eje x (x₂) */}
-                        <circle cx="12" cy="18" r="1.5" fill="#34d399" />
-
-                        {/* Línea vertical punteada desde x₂ */}
-                        <line x1="12" y1="18" x2="12" y2="14" strokeWidth="1" strokeDasharray="2 1" stroke="#14b8a6" />
-
-                        {/* Etiquetas pequeñas */}
-                        <text x="6" y="8.5" fontSize="3" fill="currentColor">x₀</text>
-                        <text x="18" y="15" fontSize="3" fill="currentColor">x₁</text>
-                        <text x="12.5" y="20" fontSize="3" fill="currentColor">x₂</text>
-                      </svg>
-                    </div>
-                    <h3 className="px-2 text-xl font-bold text-white">Newton</h3>
-                  </div>
-                  <p className="text-gray-400 mb-6">
-                    Método iterativo que utiliza la derivada de la función para aproximarse rápidamente a la raíz.
-                  </p>
-                  <div className="flex items-center text-teal-400 group-hover:text-teal-300">
-                    <span>Explorar método</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </Link>
-
-            {/* Método 5 */}
-            <Link to="/metodos/secante" className="group">
-              <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
-                <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="h-10 w-10 rounded-lg bg-teal-500/20 flex items-center justify-center mr-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6 text-teal-400">
-                        {/* Ejes de coordenadas */}
-                        <line x1="2" y1="18" x2="22" y2="18" strokeWidth="1.5" />
-                        <line x1="4" y1="2" x2="4" y2="22" strokeWidth="1.5" />
-
-                        {/* Curva de la función */}
-                        <path d="M2,14 Q7,6 12,14 Q17,22 22,10" strokeWidth="1.5" />
-
-                        {/* Puntos x₀ y x₁ en la curva */}
-                        <circle cx="7" cy="10" r="1.5" fill="#2dd4bf" />
-                        <circle cx="17" cy="16" r="1.5" fill="#2dd4bf" />
-
-                        {/* Línea secante entre los dos puntos */}
-                        <line x1="7" y1="10" x2="17" y2="16" strokeWidth="1.5" stroke="#14b8a6" />
-
-                        {/* Punto de intersección con el eje x (x₂) */}
-                        <circle cx="12" cy="18" r="1.5" fill="#34d399" />
-
-                        {/* Línea vertical punteada desde x₂ */}
-                        <line x1="12" y1="18" x2="12" y2="14" strokeWidth="1" strokeDasharray="2 1" stroke="#14b8a6" />
-
-                        {/* Etiquetas pequeñas */}
-                        <text x="6" y="8.5" fontSize="3" fill="currentColor">x₀</text>
-                        <text x="18" y="15" fontSize="3" fill="currentColor">x₁</text>
-                        <text x="12.5" y="20" fontSize="3" fill="currentColor">x₂</text>
-                      </svg>
-                    </div>
-                    <h3 className="px-2 text-xl font-bold text-white">Secante</h3>
-                  </div>
-                  <p className="text-gray-400 mb-6">
-                    Método iterativo que utiliza la derivada de la función para aproximarse rápidamente a la raíz.
-                  </p>
-                  <div className="flex items-center text-teal-400 group-hover:text-teal-300">
-                    <span>Explorar método</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </Link>
-
-            {/* Método 6 */}
-            <Link to="/metodos/raices-multiples" className="group">
-              <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
-                <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="h-10 w-10 rounded-lg bg-teal-500/20 flex items-center justify-center mr-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6 text-teal-400">
-                        {/* Ejes de coordenadas */}
-                        <line x1="2" y1="18" x2="22" y2="18" strokeWidth="1.5" />
-                        <line x1="4" y1="2" x2="4" y2="22" strokeWidth="1.5" />
-
-                        {/* Curva con raíz múltiple (tangente al eje X) */}
-                        <path d="M2,16 Q8,4 12,18 Q16,4 22,16" strokeWidth="1.5" />
-
-                        {/* Punto de raíz múltiple (tangencia) */}
-                        <circle cx="12" cy="18" r="1.5" fill="#2dd4bf" />
-
-                        {/* Línea tangente en la raíz múltiple */}
-                        <line x1="8" y1="18" x2="16" y2="18" strokeWidth="1.5" stroke="#14b8a6" />
-
-                        {/* Puntos de iteración del método */}
-                        <circle cx="10" cy="12" r="1" fill="#34d399" />
-                        <circle cx="14" cy="12" r="1" fill="#34d399" />
-
-                        {/* Líneas verticales punteadas */}
-                        <line x1="10" y1="18" x2="10" y2="12" strokeWidth="1" strokeDasharray="2 1" stroke="#14b8a6" />
-                        <line x1="14" y1="18" x2="14" y2="12" strokeWidth="1" strokeDasharray="2 1" stroke="#14b8a6" />
-
-                        {/* Indicador de multiplicidad */}
-                        <circle cx="12" cy="15" r="0.5" fill="#2dd4bf" opacity="0.7" />
-                        <circle cx="12" cy="16" r="0.5" fill="#2dd4bf" opacity="0.5" />
-                      </svg>
-                    </div>
-                    <h3 className="px-2 text-xl font-bold text-white">Método de Raíces Múltiples</h3>
-                  </div>
-                  <p className="text-gray-400 mb-6">
-                    Divide repetidamente el intervalo a la mitad y selecciona el subintervalo donde ocurre el cambio de
-                    signo.
-                  </p>
-                  <div className="flex items-center text-teal-400 group-hover:text-teal-300">
-                    <span>Explorar método</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </Link>
-
-            {/* Método 5 */}
-            <Link to="/metodos/biseccion" className="group">
-              <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
-                <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="h-10 w-10 rounded-lg bg-teal-500/20 flex items-center justify-center mr-3">
-                      {/* svg personalizado*/}
-                    </div>
-                    <h3 className="px-2 text-xl font-bold text-white">Método de Bisección</h3>
-                  </div>
-                  <p className="text-gray-400 mb-6">
-                    Divide repetidamente el intervalo a la mitad y selecciona el subintervalo donde ocurre el cambio de
-                    signo.
-                  </p>
-                  <div className="flex items-center text-teal-400 group-hover:text-teal-300">
-                    <span>Explorar método</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </Link>
-
-            {/* Método 6 */}
-            <Link to="/metodos/biseccion" className="group">
-              <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
-                <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="h-10 w-10 rounded-lg bg-teal-500/20 flex items-center justify-center mr-3">
-                      {/* svg personalizado*/}
-                    </div>
-                    <h3 className="px-2 text-xl font-bold text-white">Método de Bisección</h3>
-                  </div>
-                  <p className="text-gray-400 mb-6">
-                    Divide repetidamente el intervalo a la mitad y selecciona el subintervalo donde ocurre el cambio de
-                    signo.
-                  </p>
-                  <div className="flex items-center text-teal-400 group-hover:text-teal-300">
-                    <span>Explorar método</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </Link>
-
+              )}
+            </div>
           </div>
         </div>
       </section>
