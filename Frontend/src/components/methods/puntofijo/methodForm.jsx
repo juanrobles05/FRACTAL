@@ -1,7 +1,8 @@
 import FractalHeader from "../../FractalHeader"
-import { Link } from "react-router-dom"
 import { useState } from "react"
 import Algebrite from "algebrite"
+import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
 
 const getGSuggestions = (fStr) => {
   const x = "x"
@@ -79,6 +80,13 @@ const methodFormTemplate = ({
     setShowGHelp(!showGHelp)
   }
 
+  const navigate = useNavigate();
+
+  // Usar useCallback para evitar problemas de cierre sobre functionValue
+  const handleGraphClick = useCallback(() => {
+    navigate("/graficador", { state: { formula: functionValue } });
+  }, [navigate, functionValue]);
+
   return (
     <div className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
       <div className="bg-gradient-to-r from-teal-600 to-emerald-500 px-6 py-4">
@@ -91,13 +99,15 @@ const methodFormTemplate = ({
         <div className="mb-6 p-4 bg-teal-50 dark:bg-teal-900/20 rounded-lg border-l-4 border-teal-500">
           <p className="text-sm text-teal-800 dark:text-teal-200">
             Asegúrese de que la función sea continua en el intervalo dado. Para verificar, puede
-            <Link to="/graficador">
-              <span
-                className="text-teal-600 dark:text-teal-300 font-medium hover:underline cursor-pointer">
-                {" "} graficar la función
-              </span>
-              .
-            </Link>
+            <span
+              className="text-teal-600 dark:text-teal-300 font-medium hover:underline cursor-pointer"
+              onClick={handleGraphClick}
+              tabIndex={0}
+              role="button"
+            >
+              {" "} graficar la función
+            </span>
+            .
           </p>
         </div>
 

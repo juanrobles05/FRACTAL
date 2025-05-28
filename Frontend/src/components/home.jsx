@@ -230,7 +230,7 @@ function home() {
             </Link>
 
             {/* Método 5 */}
-            <Link to="/metodos/puntofijo" className="group">
+            <Link to="/metodos/punto-fijo" className="group">
               <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
                 <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
                 <div className="p-6">
@@ -263,7 +263,7 @@ function home() {
             </Link>
 
             {/* Método 6 */}
-            <Link to="/metodos/raicesmultiples" className="group">
+            <Link to="/metodos/raices-multiples" className="group">
               <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
                 <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
                 <div className="p-6">
