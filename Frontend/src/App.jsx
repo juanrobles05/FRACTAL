@@ -10,6 +10,9 @@ import Newton from "./components/methods/newton/newton"
 import Informe from "./components/ComparativeReportGenerator"
 import Jacobi from "./components/methods/cap2/jacobi/jacobi"
 import GaussSeidel from "./components/methods/cap2/gaussseidel/gaussseidel"
+import Sor from "./components/methods/cap2/sor/sor"
+import InformeMatrix from "./components/ComparativeMatrixReportGenerator"
+
 
 function App() {
   return (
@@ -25,7 +28,9 @@ function App() {
         <Route path="/metodos/newton" element={<Newton />} />
         <Route path="/metodos/cap2/jacobi" element={<Jacobi />} />
         <Route path="/metodos/cap2/gauss-seidel" element={<GaussSeidel />} />
+        <Route path="/metodos/cap2/sor" element={<Sor />} />
         <Route path="/informe" element={<Informe />} />
+        <Route path="/informeMatrix" element={<InformeMatrix />} />
         {/* Otras rutas */}
       </Routes>
     </div>
