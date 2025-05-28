@@ -9,6 +9,7 @@ import Puntofijo from "./components/methods/puntofijo/puntofijo"
 import Newton from "./components/methods/newton/newton"
 import Informe from "./components/ComparativeReportGenerator"
 import Jacobi from "./components/methods/cap2/jacobi/jacobi"
+import GaussSeidel from "./components/methods/cap2/gaussseidel/gaussseidel"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/metodos/punto-fijo" element={<Puntofijo />} />
         <Route path="/metodos/newton" element={<Newton />} />
         <Route path="/metodos/cap2/jacobi" element={<Jacobi />} />
+        <Route path="/metodos/cap2/gauss-seidel" element={<GaussSeidel />} />
         <Route path="/informe" element={<Informe />} />
         {/* Otras rutas */}
       </Routes>
