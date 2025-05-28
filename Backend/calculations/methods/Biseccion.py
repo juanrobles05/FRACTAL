@@ -34,11 +34,11 @@ def bisection_method(function_text, a, b, tol, max_count):
     # Casos especiales (raíces en los extremos)
     if fi == 0:
         results['iterations'].append([0, a, a, b, 0, 0])
-        results['conclusion'] = f"{a:.15f} is a root of f(x)"
+        results['conclusion'] = f"The root was found for x = {a:.15f}"
         return results
     if fs == 0:
         results['iterations'].append([0, a, b, b, 0, 0])
-        results['conclusion'] = f"{b:.15f} is a root of f(x)"
+        results['conclusion'] = f"The root was found for x = {b:.15f}"
         return results
     if fi * fs > 0:
         results['conclusion'] = "The interval is inadequate; function does not change sign"

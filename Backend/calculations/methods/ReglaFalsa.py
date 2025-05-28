@@ -36,11 +36,11 @@ def false_position_method(function_text, a, b, tol, max_count):
     # Casos especiales (raíces en los extremos)
     if fa == 0:
         results['iterations'].append([0, a, a, b, fa, 0])
-        results['conclusion'] = f"{a:.15f} is a root of f(x)"
+        results['conclusion'] = f"The root was found for x = {a:.15f}"
         return results
     if fb == 0:
         results['iterations'].append([0, a, b, b, fb, 0])
-        results['conclusion'] = f"{b:.15f} is a root of f(x)"
+        results['conclusion'] = f"The root was found for x = {b:.15f}"
         return results
     if fa * fb > 0:
         results['conclusion'] = "The interval is inadequate; function does not change sign"
