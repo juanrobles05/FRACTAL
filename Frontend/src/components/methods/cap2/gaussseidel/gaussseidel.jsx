@@ -128,6 +128,13 @@ const gaussSeidel = () => {
             <button onClick={() => setShowInfo(!showInfo)} className="text-teal-400 hover:text-teal-300 flex items-center">
               <Info className="h-5 w-5 mr-1" /> <span>Info</span>
             </button>
+
+            <button
+              onClick={() => navigate("/informe")}
+              className="flex items-center text-teal-400 hover:text-teal-300 transition-colors"
+              >
+                Ir al Informe
+              </button>
           </div>
         </div>
       </header>
