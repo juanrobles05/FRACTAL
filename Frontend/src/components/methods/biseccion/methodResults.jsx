@@ -33,9 +33,9 @@ const methodResults = ({ results, methodName, functionText }) => {
               <tr>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Iteración</th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">a</th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">xr</th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">xm</th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">b</th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">f(xr)</th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">f(xm)</th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Error</th>
               </tr>
             </thead>
@@ -45,12 +45,12 @@ const methodResults = ({ results, methodName, functionText }) => {
                   key={index}
                   className={index % 2 === 0 ? "bg-white dark:bg-gray-800" : "bg-gray-50 dark:bg-gray-700/50"}
                 >
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">{row[0]}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900 dark:text-white font-mono">{row[1]}</td>
-                  <td className="px-4 py-3 text-sm text-teal-600 dark:text-teal-400 font-medium font-mono">{row[2]}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900 dark:text-white font-mono">{row[3]}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900 dark:text-white font-mono">{row[4]}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900 dark:text-white font-mono">{row[5] || "-"}</td>
+                  <td className="px-1 py-3 text-sm font-medium text-gray-900 dark:text-white">{row[0]}</td>
+                  <td className="px-2 py-3 text-sm text-gray-900 dark:text-white font-mono">{row[1]}</td>
+                  <td className="px-2.5 py-3 text-sm text-teal-600 dark:text-teal-400 font-medium font-mono">{row[2]}</td>
+                  <td className="px-2 py-3 text-sm text-gray-900 dark:text-white font-mono">{row[3]}</td>
+                  <td className="px-3 py-3 text-sm text-gray-900 dark:text-white font-mono">{row[4]}</td>
+                  <td className="px-3 py-3 text-sm text-gray-900 dark:text-white font-mono">{row[5] || "-"}</td>
                 </tr>
               ))}
             </tbody>
