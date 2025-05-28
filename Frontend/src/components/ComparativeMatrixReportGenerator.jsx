@@ -93,7 +93,7 @@ const ComparativeMatrixReportGenerator = () => {
     vectorB: [1, 1, 1, 1],
     vectorX0: [0, 0, 0, 0],
     norm: "2",
-    tol: "1e-7",
+    tolerance: "1e-7",
     maxIterations: 100,
     w: 1.5,
   });

@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import methodFormTemplate from "./methodForm.jsx";
 import MethodResults from "./methodResults.jsx";
 import api from "../../../../api/config.js";
+import { useNavigate } from "react-router-dom";
 
 const gaussSeidel = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     n: 4,
     matrixA: [
@@ -130,7 +132,7 @@ const gaussSeidel = () => {
             </button>
 
             <button
-              onClick={() => navigate("/informe")}
+              onClick={() => navigate("/informeMatrix")}
               className="flex items-center text-teal-400 hover:text-teal-300 transition-colors"
               >
                 Ir al Informe

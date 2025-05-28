@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import methodFormTemplate from "./methodForm.jsx";
 import MethodResults from "./methodResults.jsx";
 import api from "../../../../api/config";
+import { useNavigate } from "react-router-dom";
 
 const Jacobi = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     n: 4,
     matrixA: [
@@ -128,6 +130,13 @@ const Jacobi = () => {
             <button onClick={() => setShowInfo(!showInfo)} className="text-teal-400 hover:text-teal-300 flex items-center">
               <Info className="h-5 w-5 mr-1" /> <span>Info</span>
             </button>
+
+            <button
+              onClick={() => navigate("/informeMatrix")}
+              className="flex items-center text-teal-400 hover:text-teal-300 transition-colors"
+              >
+                Ir al Informe
+              </button>
           </div>
         </div>
       </header>
