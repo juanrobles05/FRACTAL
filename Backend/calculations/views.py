@@ -7,6 +7,7 @@ from .methods.Biseccion import bisection_method
 from .methods.PuntoFijo import fixed_point_method
 from .methods.Newton import newton_method
 from .methods.cap2.Jacobi import jacobi_method
+from .methods.cap2.GaussSeidel import gaussSeidel_method
 
 @api_view(['GET'])
 def test_calculations(request):
@@ -188,6 +189,36 @@ def calculate_jacobi(request):
 
         # Llamar a la función del método de Jacobi.
         results = jacobi_method(matrixA, vectorB, vectorX0, tol, max_count, norm_type)
+
+        return Response(results, status=200)
+
+    except ValueError as e:
+        print(e)
+        return Response({"error": str(e)}, status=400)
+    except Exception as e:
+        print(e)
+        return Response({"error": "Error inesperado: " + str(e)}, status=500)
+
+@api_view(['POST'])
+def calculate_gaussSeidel(request):
+    try:
+         # Leer los datos enviados desde el frontend.
+        data = request.data
+        matrixA = data.get('matrix')
+        vectorB = data.get('vector_b')
+        vectorX0 = data.get('vector_x0')
+        norm_type = float(data.get('norm'))
+        tol = float(data.get('tol'))
+        max_count = int(data.get('max_count'))
+
+        print(data)
+
+        # Validar que los datos sean correctos.
+        if not matrixA or not vectorB or not vectorX0 or tol is None or max_count is None:
+            return Response({"error": "Faltan parámetros"}, status=400)
+
+        # Llamar a la función del método de Jacobi.
+        results = gaussSeidel_method(matrixA, vectorB, vectorX0, tol, max_count, norm_type)
 
         return Response(results, status=200)
 
