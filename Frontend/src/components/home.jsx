@@ -311,7 +311,7 @@ function home() {
               </div>
             </Link>
             {/* Gauss-Seidel */}
-            <Link to="/metodos/gauss-seidel" className="group">
+            <Link to="/metodos/gauss" className="group">
               <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
                 <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
                 <div className="p-6">
@@ -337,7 +337,7 @@ function home() {
           <h3 className="text-left text-2xl font-bold text-white mb-4 mt-12">Capítulo 3</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Métodos Interpolación: Vandermonde, Newton Interpolante, Lagrange, Splines */}
-            <Link to="/metodos/vandermonde" className="group">
+            <Link to="/metodos/vander" className="group">
               <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
                 <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
                 <div className="p-6">
@@ -346,7 +346,7 @@ function home() {
                 </div>
               </div>
             </Link>
-            <Link to="/metodos/newton-interpolante" className="group">
+            <Link to="/metodos/newtonint" className="group">
               <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-teal-500/50">
                 <div className="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
                 <div className="p-6">

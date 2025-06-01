@@ -3,6 +3,10 @@ from rest_framework.response import Response
 from .methods.ReglaFalsa import false_position_method
 from .methods.Secante import secant_method
 from .methods.Newton import newton_method
+from .methods.vander import vandermonde_interpolation
+from .methods.lagrange import lagrange_interpolation
+from .methods.newtonint import newton_interpolante
+from .methods.spline import spline_method
 
 @api_view(['GET'])
 def test_calculations(request):
@@ -85,3 +89,89 @@ def calculate_newton(request):
         return Response({"error": str(e)}, status=400)
     except Exception as e:
         return Response({"error": "Error inesperado: " + str(e)}, status=500)
+    
+def calculate_vandermonde(request):
+    try:
+        # Leer los datos enviados desde el frontend.
+        data = request.data
+        x_points = data.get('x_points')
+        y_points = data.get('y_points')
+        order = int(data.get('order'))
+
+        # Validar que los datos sean correctos.
+        if not x_points or not y_points or order is None:
+            return Response({"error": "Faltan parámetros"}, status=400)
+
+        # Llamar a la función de interpolación de Vandermonde.
+        results = vandermonde_interpolation(x_points, y_points, order)
+
+        return Response(results, status=200)
+
+    except ValueError as e:
+        return Response({"error": str(e)}, status=400)
+    except Exception as e:
+        return Response({"error": "Error inesperado: " + str(e)}, status=500)
+    
+def calculate_lagrange(request):
+    try:
+        # Leer los datos enviados desde el frontend.
+        data = request.data
+        x_points = data.get('x_points')
+        y_points = data.get('y_points')
+
+        # Validar que los datos sean correctos.
+        if not x_points or not y_points:
+            return Response({"error": "Faltan parámetros"}, status=400)
+
+        # Llamar a la función de interpolación de Lagrange.
+        results = lagrange_interpolation(x_points, y_points)
+
+        return Response(results, status=200)
+
+    except ValueError as e:
+        return Response({"error": str(e)}, status=400)
+    except Exception as e:
+        return Response({"error": "Error inesperado: " + str(e)}, status=500)
+    
+def calculate_newton_interpolante(request):
+    try:
+        # Leer los datos enviados desde el frontend.
+        data = request.data
+        x_vals = data.get('x_vals')
+        y_vals = data.get('y_vals')
+
+        # Validar que los datos sean correctos.
+        if not x_vals or not y_vals:
+            return Response({"error": "Faltan parámetros"}, status=400)
+
+        # Llamar a la función de interpolación de Newton.
+        results = newton_interpolante(x_vals, y_vals)
+
+        return Response(results, status=200)
+
+    except ValueError as e:
+        return Response({"error": str(e)}, status=400)
+    except Exception as e:
+        return Response({"error": "Error inesperado: " + str(e)}, status=500)
+    
+def calculate_spline(request):
+    try:
+        # Leer los datos enviados desde el frontend.
+        data = request.data
+        x_vals = data.get('x_vals')
+        y_vals = data.get('y_vals')
+
+        # Validar que los datos sean correctos.
+        if not x_vals or not y_vals:
+            return Response({"error": "Faltan parámetros"}, status=400)
+
+        # Llamar a la función de interpolación por splines.
+        results = spline_method(x_vals, y_vals)
+
+        return Response(results, status=200)
+
+    except ValueError as e:
+        return Response({"error": str(e)}, status=400)
+    except Exception as e:
+        return Response({"error": "Error inesperado: " + str(e)}, status=500)
+    
